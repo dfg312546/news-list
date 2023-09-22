@@ -1,0 +1,96 @@
+.mainNavUl {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+  display: flex;
+  padding-left: 50px;
+}
+
+.mainNavLi {
+  margin-right: 30px;
+  list-style: none;
+}
+
+.mainNavLink {
+  color:darkred;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.h1 {
+  margin-left: 20px;
+}
+
+/* 以下新聞列表 */
+
+.newsItemLi {
+  display: flex;
+  margin: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.newsItemImg {
+  max-width: 450px;
+  margin: 20px;
+}
+
+.newsItemNoImg {
+  font-weight: bold;
+  font-size: 1.25rem;
+  margin: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+}
+
+.newsItemInfo {
+
+}
+
+.newsItemTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 20px;
+}
+
+.newsItemDescription {
+  margin: 20px;
+}
+
+.newItemViewDetailButton {
+  background-color: white;
+  font-weight: bold;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+/* 以下Footer */
+
+.footerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footerButton {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 5px;
+  margin: 0 20px;
+  cursor: pointer;
+}
+
+.footerPage {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
