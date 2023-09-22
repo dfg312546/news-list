@@ -46,7 +46,7 @@ export default DetailPage
 
 export async function getStaticPaths() {
   try {
-    const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${api_key}&page_size=10`, {
+    const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${api_key}&page_size=200`, {
       method: 'GET',
     });
     if (!response.ok) {
@@ -56,7 +56,7 @@ export async function getStaticPaths() {
     const paths = data.news.map((newsItem) => ({
       params: {newsDetail: newsItem.id.toString()}
     }))
-
+    
     return {
     fallback: "blocking",
     paths: paths,
@@ -72,7 +72,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps() {
   try {
-    const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${api_key}&page_size=10`, {
+    const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${api_key}&page_size=200`, {
       method: 'GET',
     });
     if (!response.ok) {
