@@ -19,7 +19,7 @@ function DetailPage(props) {
   return (
     <>
     <Head>
-      <title>{news.title}</title>
+      <title>News-List</title>
       <meta name="description" content="新聞詳細內容及來源" />
     </Head>
     <div className={styles.newsDetailPage}>
