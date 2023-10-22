@@ -48,9 +48,9 @@ export default function Home(props) {
         <meta name="description" content="練習用project" />
         <meta name="keywords" content="即時新聞API" />
       </Head>
-      <h1 className={styles.h1}>Welcome to Next</h1>
+      <h2 className={styles.h1}>Welcome to Next ! Here are the lastest News for  you !</h2>
       <NewsList lastestNews={news}/>
-      <Footer page={newsPage} fetchNewsData={fetchNewsData}/>
+      <Footer news={news} setNews={setNews} page={newsPage} setNewsPage={setNewsPage} fetchNewsData={fetchNewsData}/>
     </>
   )
 }
@@ -113,8 +113,11 @@ export function NewsList(props) {
          id={news.id}
          image={news.image} 
          title={news.title} 
-         description={news.description
-        }/>)
+         description={news.description}
+         author={news.author}
+         url={news.url}
+         published={news.published}
+        />)
       }
     </ul>
   )
@@ -123,7 +126,17 @@ export function NewsList(props) {
 export function NewsItem(props) {
   const router = useRouter();
   function goDetailPage() {
-    router.push('/' + props.id)
+    router.push({
+      pathname: `/${props.id}`,
+      query: {
+        image: props.image,
+        title: props.title,
+        description: props.description,
+        author: props.author,
+        url: props.url,
+        published: props.published
+      },
+    })
   }
 
   return (
@@ -139,10 +152,36 @@ export function NewsItem(props) {
 }
 
 export function Footer(props) {
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    let updatedPage = props.page;
+
+    const response = await fetch(`https://api.currentsapi.services/v1/latest-news?apiKey=${api_key}&page_number=${updatedPage}&page_size=10`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+
+    console.log(data)
+    props.setNews(data.news)
+    props.setNewsPage(updatedPage)
+    window.scrollTo({top :0 ,left :0 ,behavior: "smooth"})
+    return data;
+  }
+
   return (
     <div className={styles.footerContainer}>
     <button onClick={() => {props.fetchNewsData('prev')}} className={styles.footerButton}>prev</button>
-    <p className={styles.footerPage}>{props.page}</p>
+    <form className={styles.footerPage} onSubmit={handleSubmit}>
+      <input className={styles.footerPageInput} value={props.page} onChange={(event) => {props.setNewsPage(event.target.value)}}/>
+      <button className={styles.footerPageBtn} type='submit'>Go</button>
+    </form>
+    {/* <p className={styles.footerPage}>{props.page}</p> */}
     <button onClick={() => props.fetchNewsData('next')} className={styles.footerButton}>next</button>
     </div>
   )
