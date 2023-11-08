@@ -68,14 +68,14 @@ export async function getStaticProps() {
     
     return {
       props: {
-        initialData: data, // 将数据传递给组件的 initialData 属性
+        initialData: data, //傳給組件的initialData
       },
     };
   } catch (error) {
     console.error('There was a problem with the fetch operation:', error);
     return {
       props: {
-        initialData: {}, // 如果发生错误，可以传递一个空对象
+        initialData: {}, //發生錯誤返回空物件
       },
     };
   }
@@ -126,9 +126,9 @@ export function NewsList(props) {
 export function NewsItem(props) {
   const router = useRouter();
   function goDetailPage() {
-    router.push({
+    router.push({//導航到動態路由
       pathname: `/${props.id}`,
-      query: {
+      query: {//可透過query傳遞屬性
         image: props.image,
         title: props.title,
         description: props.description,
@@ -181,7 +181,6 @@ export function Footer(props) {
       <input className={styles.footerPageInput} value={props.page} onChange={(event) => {props.setNewsPage(event.target.value)}}/>
       <button className={styles.footerPageBtn} type='submit'>Go</button>
     </form>
-    {/* <p className={styles.footerPage}>{props.page}</p> */}
     <button onClick={() => props.fetchNewsData('next')} className={styles.footerButton}>next</button>
     </div>
   )
